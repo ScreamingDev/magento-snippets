@@ -9,76 +9,45 @@ Pear for 1.4, mage for 1.5. File downloaded into /downloader/.cache/community/
 ## Clear cache/reindex
 
 ```php
-<?php
-// clear cache
-Mage::app()->removeCache('catalog_rules_dirty');
-// reindex prices
-Mage::getModel('index/process')->load(2)->reindexEverything();
-/*
-1 = Product Attributes
-2 = Product Attributes
-3 = Catalog URL Rewrites
-4 = Product Flat Data
-5 = Category Flat Data
-6 = Category Products
-7 = Catalog Search Index
-8 = Tag Aggregation Data
-9 = Stock Status
-*/
-?>
-```
+    <?php
 
-## Load category by id
+    // clear cache
+    Mage::app()->removeCache('catalog_rules_dirty');
+    // reindex prices
+    Mage::getModel('index/process')->load(2)->reindexEverything();
+    /*
+    1 = Product Attributes
+    2 = Product Attributes
+    3 = Catalog URL Rewrites
+    4 = Product Flat Data
+    5 = Category Flat Data
+    6 = Category Products
+    7 = Catalog Search Index
+    8 = Tag Aggregation Data
+    9 = Stock Status
+    */
 
-```php
-<?php
-$_category = Mage::getModel('catalog/category')->load(89);
-$_category_url = $_category->getUrl();
-?>
-```
-
-## Load product by id or sku
-
-```php
-<?php
-$_product_1 = Mage::getModel('catalog/product')->load(12);
-$_product_2 = Mage::getModel('catalog/product')->loadByAttribute('sku','cordoba-classic-6-String-guitar');
-?>
-```
-
-
-## Get Configurable product's Child products
-
-```php
-<?php
-// input is $_product and result is iterating child products
-$childProducts = Mage::getModel('catalog/product_type_configurable')->getUsedProducts(null, $product);
-?>
-```
-
-## Get Configurable product's Children's (simple product) custom attributes
-
-```php
-<?php
-// input is $_product and result is iterating child products
-$conf = Mage::getModel('catalog/product_type_configurable')->setProduct($_product);
-$col = $conf->getUsedProductCollection()->addAttributeToSelect('*')->addFilterByRequiredOptions();
-foreach($col as $simple_product){
-	var_dump($simple_product->getId());
-}
-?>
+    ?>
 ```
 
 ## Log to custom file
 
 ```php
-<?php Mage::log('Your Log Message', Zend_Log::INFO, 'your_log_file.log'); ?>
+    <?php
+
+    Mage::log('Your Log Message', Zend_Log::INFO, 'your_log_file.log');
+
+    ?>
 ```
 
 ## Call Static Block
 
 ```php
-<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('block-name')->toHtml(); ?>
+    <?php
+
+    echo $this->getLayout()->createBlock('cms/block')->setBlockId('block-name')->toHtml();
+
+    ?>
 ```
 
 ## Add JavaScript to page
@@ -86,7 +55,9 @@ foreach($col as $simple_product){
 First approach: page.xml - you can add something like
 
 ```xml
-<action method="addJs"><script>path/to/my/file.js</script></action>
+    <action method="addJs">
+        <script>path/to/my/file.js</script>
+    </action>
 ```
 
 Second approach: Find `page/html/head.phtml` in your theme and add the code directly to `page.html`.
@@ -94,7 +65,11 @@ Second approach: Find `page/html/head.phtml` in your theme and add the code dire
 Third approach: If you look at the stock page.html mentioned above, you'll see this line
 
 ```php
-<?php echo $this->getChildHtml() ?>
+    <?php
+
+    echo $this->getChildHtml()
+
+    ?>
 ```
 
 Normally, the getChildHtml method is used to render a specific child block. However, if called with no paramater, getChildHtml will automatically render all the child blocks. That means you can add something like
@@ -110,27 +85,35 @@ to `page.xml`, and then add the `mytemplate.phtml` file. Any block added to the 
 ## Check if customer is logged in
 
 ```php
-<?php $logged_in = Mage::getSingleton('customer/session')->isLoggedIn(); // (boolean) ?>
+    <?php
+
+    $logged_in = Mage::getSingleton('customer/session')->isLoggedIn(); // (boolean)
+
+    ?>
 ```
 
 ## Get the current category/product/cms page
 
 ```php
-<?php
-$currentCategory = Mage::registry('current_category');
-$currentProduct = Mage::registry('current_product');
-$currentCmsPage = Mage::registry('cms_page');
-?>
+    <?php
+
+    $currentCategory = Mage::registry('current_category');
+    $currentProduct = Mage::registry('current_product');
+    $currentCmsPage = Mage::registry('cms_page');
+
+    ?>
 ```
 
 ## Run Magento Code Externally
 
 ```php
 <?php
+
 require_once('app/Mage.php'); //Path to Magento
 umask(0);
 Mage::app();
 // Run you code here
+
 ?>
 ```
 
@@ -162,10 +145,10 @@ Clear your cache and sessions.
 By default, Magento will check the 'Exclude' box for you on all imported images, making them not show up as a thumbnail under the main product image on the product view.
 
 ```sql
-# Mass Unexclude
-UPDATE`catalog_product_entity_media_gallery_value` SET `disabled` = '0' WHERE `disabled` = '1';
-# Mass Exclude
-UPDATE`catalog_product_entity_media_gallery_value` SET `disabled` = '1' WHERE `disabled` = '0';
+    # Mass Unexclude
+    UPDATE`catalog_product_entity_media_gallery_value` SET `disabled` = '0' WHERE `disabled` = '1';
+    # Mass Exclude
+    UPDATE`catalog_product_entity_media_gallery_value` SET `disabled` = '1' WHERE `disabled` = '0';
 ```
 
 ## getBaseUrl – Magento URL Path
@@ -313,91 +296,6 @@ AND
 	newsletter_subscriber.`subscriber_status` = 1;
 ```
 
-## Get associated products
-
-In /app/design/frontend/default/site/template/catalog/product/view/type/
-
-``` php
-<?php $_helper = $this->helper('catalog/output'); ?>
-<?php $_associatedProducts = $this->getAllowProducts() ?>
-<?php //var_dump($_associatedProducts); ?>
-<br />
-<br />
-<?php if (count($_associatedProducts)): ?>
-	<?php foreach ($_associatedProducts as $_item): ?>
-		<a href="<?php echo $_item->getProductUrl() ?>"><?php echo $_helper->productAttribute($_item, $_item->getName(), 'name') ?> | <?php echo $_item->getName() ?> | <?php echo $_item->getPrice() ?></a>
-		<br />
-		<br />
-	<?php endforeach; ?>
-<?php endif; ?>
-```
-
-## Get An Array of Country Names/Codes in Magento
-
-```php
-<?php
-$countryList = Mage::getResourceModel('directory/country_collection')
-                    ->loadData()
-                    ->toOptionArray(false);
-
-    echo '<pre>';
-    print_r( $countryList);
-    exit('</pre>');
-?>
-```
-
-## Create a Country Drop Down in the Frontend of Magento
-
-```php
-<?php
-$_countries = Mage::getResourceModel('directory/country_collection')
-                                    ->loadData()
-                                    ->toOptionArray(false) ?>
-<?php if (count($_countries) > 0): ?>
-    <select name="country" id="country">
-        <option value="">-- Please Select --</option>
-        <?php foreach($_countries as $_country): ?>
-            <option value="<?php echo $_country['value'] ?>">
-                <?php echo $_country['label'] ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-<?php endif; ?>
-```
-
-## Create a Country Drop Down in the Magento Admin
-
-```php
-<?php
-    $fieldset->addField('country', 'select', array(
-        'name'  => 'country',
-        'label'     => 'Country',
-        'values'    => Mage::getModel('adminhtml/system_config_source_country')->toOptionArray(),
-    ));
-?>
-```
-
-## Return Product Attributes
-
-```php
-<?php
-$_product->getThisattribute();
-$_product->getAttributeText('thisattribute');
-$_product->getResource()->getAttribute('thisattribute')->getFrontend()->getValue($_product);
-$_product->getData('thisattribute');
-// The following returns the option IDs for an attribute that is a multiple-select field:
-$_product->getData('color'); // i.e. 456,499
-// The following returns the attribute object, and instance of Mage_Catalog_Model_Resource_Eav_Attribute:
-$_product->getResource()->getAttribute('color'); // instance of Mage_Catalog_Model_Resource_Eav_Attribute
-// The following returns an array of the text values for the attribute:
-$_product->getAttributeText('color') // Array([0]=>'red', [1]=>'green')
-// The following returns the text for the attribute
-if ($attr = $_product->getResource()->getAttribute('color')):
-    echo $attr->getFrontend()->getValue($_product); // will display: red, green
-endif;
-?>
-```
-
 ## Cart Data
 
 ```php
@@ -410,32 +308,6 @@ $session = Mage::getSingleton('checkout/session');
 foreach ($session->getQuote()->getAllItems() as $item) {
     echo $item->getName();
     Zend_Debug::dump($item->debug());
-}
-?>
-```
-
-## Get Simple Products of a Configurable Product
-
-```php
-<?php
-if($_product->getTypeId() == "configurable") {
-    $ids = $_product->getTypeInstance()->getUsedProductIds();
-?>
-<ul>
-    <?php
-    foreach ($ids as $id) {
-        $simpleproduct = Mage::getModel('catalog/product')->load($id);
-    ?>
-        <li>
-        	<?php
-        	echo $simpleproduct->getName() . " - " . (int)Mage::getModel('cataloginventory/stock_item')->loadByProduct($simpleproduct)->getQty();
-        	?>
-        </li>
-    <?php
-    }
-    ?>
-</ul>
-<?php
 }
 ?>
 ```
@@ -487,16 +359,4 @@ TRUNCATE TABLE `catalog_product_website`;
 TRUNCATE TABLE `catalog_product_entity`;
 TRUNCATE TABLE `cataloginventory_stock_item`;
 TRUNCATE TABLE `cataloginventory_stock_status`;
-```
-
-## Getting Configurable Product from Simple Product ID in Magento 1.5+
-
-```php
-<?php
-$simpleProductId = 465;
-$parentIds = Mage::getResourceSingleton('catalog/product_type_configurable')
-    ->getParentIdsByChild($simpleProductId);
-$product = Mage::getModel('catalog/product')->load($parentIds[0]);
-echo $product->getId(); // ID = 462 (aka, Parent of 465)
-?>
 ```
