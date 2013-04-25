@@ -100,7 +100,7 @@ to `page.xml`, and then add the `mytemplate.phtml` file. Any block added to the 
 require_once('app/Mage.php'); //Path to Magento
 umask(0);
 Mage::app();
-// Run you code here
+// Run your code here
 
 ?>
 ```
