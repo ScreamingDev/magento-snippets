@@ -4,6 +4,14 @@ This is based on the great
 [GIST] (https://gist.github.com/davidalexander/1086455) of
 [David Alexander] (https://github.com/davidalexander).
 
+## Content
+
+Divided by Magento structure:
+
+* [Catalog]
+* [Directory]
+* [Other]
+
 ## Contribute
 
 Fork and add your own snippets.
