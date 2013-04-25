@@ -95,62 +95,6 @@ Open up the `/app/etc/local.xml` file, locate the `<frontName>` tag, and change 
 
 Clear your cache and sessions.
 
-## Magento: Mass Exclude/Unexclude Images
-
-By default, Magento will check the 'Exclude' box for you on all imported images, making them not show up as a thumbnail under the main product image on the product view.
-
-```sql
-    # Mass Unexclude
-    UPDATE`catalog_product_entity_media_gallery_value` SET `disabled` = '0' WHERE `disabled` = '1';
-    # Mass Exclude
-    UPDATE`catalog_product_entity_media_gallery_value` SET `disabled` = '1' WHERE `disabled` = '0';
-```
-
-## Get The Root Category In Magento
-
-```php
-<?php
-$rootCategoryId = Mage::app()->getStore()->getRootCategoryId();
-$_category = Mage::getModel('catalog/category')->load($rootCategoryId);
-// You can then get all of the top level categories using:
-$_subcategories = $_category->getChildrenCategories();
-?>
-```
-
-## Category Navigation Listings in Magento
-
-Make sure the block that you’re working is of the type catalog/navigation. If you’re editing catalog/navigation/left.phtml then you should be okay.
-
-```php
-<div id="leftnav">
-	<?php $helper = $this->helper('catalog/category') ?>
-	<?php $categories = $this->getStoreCategories() ?>
-	<?php if (count($categories) > 0): ?>
-		<ul id="leftnav-tree" class="level0">
-			<?php foreach($categories as $category): ?>
-				<li class="level0<?php if ($this->isCategoryActive($category)): ?> active<?php endif; ?>">
-					<a href="<?php echo $helper->getCategoryUrl($category) ?>"><span><?php echo $this->escapeHtml($category->getName()) ?></span></a>
-					<?php if ($this->isCategoryActive($category)): ?>
-						<?php $subcategories = $category->getChildren() ?>
-						<?php if (count($subcategories) > 0): ?>
-							<ul id="leftnav-tree-<?php echo $category->getId() ?>" class="level1">
-								<?php foreach($subcategories as $subcategory): ?>
-									<li class="level1<?php if ($this->isCategoryActive($subcategory)): ?> active<?php endif; ?>">
-										<a href="<?php echo $helper->getCategoryUrl($subcategory) ?>"><?php echo $this->escapeHtml(trim($subcategory->getName(), '- ')) ?></a>
-									</li>
-								<?php endforeach; ?>
-							</ul>
-							<script type="text/javascript">decorateList('leftnav-tree-<?php echo $category->getId() ?>', 'recursive')</script>
-						<?php endif; ?>
-					<?php endif; ?>
-				</li>
-			<?php endforeach; ?>
-		</ul>
-		<script type="text/javascript">decorateList('leftnav-tree', 'recursive')</script>
-	<?php endif; ?>
-</div>
-```
-
 ## Debug using zend
 
 ```php
@@ -192,28 +136,6 @@ foreach($methods as $method)
 ?>
 ```
 
-## Is product purchasable?
-
-```php
-<?php if($_product->isSaleable()) { // do stuff } ?>
-```
-
-## Load Products by Category ID
-
-```php
-<?php
-$_category = Mage::getModel('catalog/category')->load(47);
-$_productCollection = $_category->getProductCollection();
-if($_productCollection->count()) {
-	foreach( $_productCollection as $_product ):
-		echo $_product->getProductUrl();
-		echo $this->getPriceHtml($_product, true);
-		echo $this->htmlEscape($_product->getName());
-	endforeach;
-}
-?>
-```
-
 ## Update all subscribers into a customer group (e.g. 5)
 
 ```sql
@@ -242,40 +164,4 @@ foreach ($session->getQuote()->getAllItems() as $item) {
     Zend_Debug::dump($item->debug());
 }
 ?>
-```
-
-## Delete all products
-
-```sql
-TRUNCATE TABLE `catalog_product_bundle_option`;
-TRUNCATE TABLE `catalog_product_bundle_option_value`;
-TRUNCATE TABLE `catalog_product_bundle_selection`;
-TRUNCATE TABLE `catalog_product_entity_datetime`;
-TRUNCATE TABLE `catalog_product_entity_decimal`;
-TRUNCATE TABLE `catalog_product_entity_gallery`;
-TRUNCATE TABLE `catalog_product_entity_int`;
-TRUNCATE TABLE `catalog_product_entity_media_gallery`;
-TRUNCATE TABLE `catalog_product_entity_media_gallery_value`;
-TRUNCATE TABLE `catalog_product_entity_text`;
-TRUNCATE TABLE `catalog_product_entity_tier_price`;
-TRUNCATE TABLE `catalog_product_entity_varchar`;
-TRUNCATE TABLE `catalog_product_link`;
-TRUNCATE TABLE `catalog_product_link_attribute_decimal`;
-TRUNCATE TABLE `catalog_product_link_attribute_int`;
-TRUNCATE TABLE `catalog_product_link_attribute_varchar`;
-TRUNCATE TABLE `catalog_product_option`;
-TRUNCATE TABLE `catalog_product_option_price`;
-TRUNCATE TABLE `catalog_product_option_title`;
-TRUNCATE TABLE `catalog_product_option_type_price`;
-TRUNCATE TABLE `catalog_product_option_type_title`;
-TRUNCATE TABLE `catalog_product_option_type_value`;
-TRUNCATE TABLE `catalog_product_super_attribute`;
-TRUNCATE TABLE `catalog_product_super_attribute_label`;
-TRUNCATE TABLE `catalog_product_super_attribute_pricing`;
-TRUNCATE TABLE `catalog_product_super_link`;
-TRUNCATE TABLE `catalog_product_enabled_index`;
-TRUNCATE TABLE `catalog_product_website`;
-TRUNCATE TABLE `catalog_product_entity`;
-TRUNCATE TABLE `cataloginventory_stock_item`;
-TRUNCATE TABLE `cataloginventory_stock_status`;
 ```
