@@ -1,4 +1,4 @@
-# Magento Snippets
+# Other Magento Snippets
 
 ## Download extension manually using pear/mage
 Pear for 1.4, mage for 1.5. File downloaded into /downloader/.cache/community/
@@ -65,7 +65,7 @@ Mage::app();
 ?>
 ```
 
-## Get the current category/product/cms page
+## Get the current cms page
 
 ```php
 <?php
