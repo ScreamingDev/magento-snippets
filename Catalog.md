@@ -214,7 +214,7 @@ $_category_url = $_category->getUrl();
 ?>
 ```
 
-## Get the current category/product/cms page
+## Get the current category
 
 ```php
 <?php
