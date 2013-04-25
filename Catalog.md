@@ -120,17 +120,35 @@ In /app/design/frontend/default/site/template/catalog/product/view/type/
     ?>
 ```
 
+## Get the current product
+
+```
+<?php
+
+$currentProduct = Mage::registry('current_product');
+
+?>
+```
 
 ## Category
 
 ### Load category by id
 
 ```php
-    <?php
+<?php
 
-    $_category = Mage::getModel('catalog/category')->load(89);
-    $_category_url = $_category->getUrl();
+$_category = Mage::getModel('catalog/category')->load(89);
+$_category_url = $_category->getUrl();
 
-    ?>
+?>
 ```
 
+## Get the current category/product/cms page
+
+```php
+<?php
+
+$currentCategory = Mage::registry('current_category');
+
+?>
+```

@@ -92,18 +92,6 @@ to `page.xml`, and then add the `mytemplate.phtml` file. Any block added to the 
     ?>
 ```
 
-## Get the current category/product/cms page
-
-```php
-    <?php
-
-    $currentCategory = Mage::registry('current_category');
-    $currentProduct = Mage::registry('current_product');
-    $currentCmsPage = Mage::registry('cms_page');
-
-    ?>
-```
-
 ## Run Magento Code Externally
 
 ```php
@@ -113,6 +101,16 @@ require_once('app/Mage.php'); //Path to Magento
 umask(0);
 Mage::app();
 // Run you code here
+
+?>
+```
+
+## Get the current category/product/cms page
+
+```php
+<?php
+
+$currentCmsPage = Mage::registry('cms_page');
 
 ?>
 ```
