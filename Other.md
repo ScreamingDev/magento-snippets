@@ -52,16 +52,6 @@ Pear for 1.4, mage for 1.5. File downloaded into /downloader/.cache/community/
 
 to `page.xml`, and then add the `mytemplate.phtml` file. Any block added to the head block will be automatically rendered. (this automatic rendering doesn't apply for all layout blocks, only for blocks where getChildHtml is called without paramaters).
 
-## Check if customer is logged in
-
-```php
-    <?php
-
-    $logged_in = Mage::getSingleton('customer/session')->isLoggedIn(); // (boolean)
-
-    ?>
-```
-
 ## Run Magento Code Externally
 
 ```php
@@ -134,20 +124,6 @@ foreach($methods as $method)
 	var_dump($method);
 }
 ?>
-```
-
-## Update all subscribers into a customer group (e.g. 5)
-
-```sql
-UPDATE
-	customer_entity,
-	newsletter_subscriber
-SET
-	customer_entity.`group_id` = 5
-WHERE
-	customer_entity.`entity_id` = newsletter_subscriber.`customer_id`
-AND
-	newsletter_subscriber.`subscriber_status` = 1;
 ```
 
 ## Cart Data
