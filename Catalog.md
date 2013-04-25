@@ -1,6 +1,3 @@
-* auto-gen TOC:
-{:toc}
-
 # Catalog
 
 Whatever could be useful for Mage Catalog and it's known childs can be found here.
