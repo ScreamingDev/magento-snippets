@@ -126,18 +126,11 @@ foreach($methods as $method)
 ?>
 ```
 
-## Cart Data
+## Check if Magento has been modified
 
-```php
-<?php
-$cart = Mage::getModel('checkout/cart')->getQuote()->getData();
-print_r($cart);
-$cart = Mage::helper('checkout/cart')->getCart()->getItemsCount();
-print_r($cart);
-$session = Mage::getSingleton('checkout/session');
-foreach ($session->getQuote()->getAllItems() as $item) {
-    echo $item->getName();
-    Zend_Debug::dump($item->debug());
-}
-?>
+Sometimes customer or other companies ruin the code.
+Check if something has changed:
+
+```sh
+diff -qrbB magento_folder client_folder
 ```
