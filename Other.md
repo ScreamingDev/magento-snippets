@@ -102,9 +102,11 @@ Clear your cache and sessions.
 
 // $_GET
 $productId = Mage::app()->getRequest()->getParam('product_id');
-// The second parameter to getParam allows you to set a default value which is returned if the GET value isn't set
+
+// The second parameter allows you to set a default value
 $productId = Mage::app()->getRequest()->getParam('product_id', 44);
 $postData = Mage::app()->getRequest()->getPost();
+
 // You can access individual variables like...
 $productId = $postData['product_id']);
 
