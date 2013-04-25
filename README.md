@@ -9,6 +9,8 @@ This is based on the great
 Divided by Magento structure:
 
 * [Catalog](Catalog.md)
+* [Core](Catalog.md) - handles Store, Template / Blocks, Request, Response, Cookies, Locale, Converter, etc.
+* [Customer](Customer.md)
 * [Directory](Diectory.md)
 * [Other](Other.md)
 
