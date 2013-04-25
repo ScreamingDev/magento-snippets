@@ -8,9 +8,9 @@ This is based on the great
 
 Divided by Magento structure:
 
-* [Catalog](Catalog)
-* [Directory](Diectory)
-* [Other](Other)
+* [Catalog](Catalog.md)
+* [Directory](Diectory.md)
+* [Other](Other.md)
 
 ## Contribute
 
