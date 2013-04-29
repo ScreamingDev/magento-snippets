@@ -278,6 +278,7 @@ Make sure the block that you’re working is of the type catalog/navigation. If 
         $category = Mage::getModel('catalog/category');
 
 	$parentId = null;	// possible parent
+	$storeId = 1;		// store where the categories should go
 	
 	$mapping = array(
 	        'name'             => '',
@@ -295,6 +296,8 @@ Make sure the block that you’re working is of the type catalog/navigation. If 
 	);
 
 	$category->addData($mapping);
+	$category->setStoreId($storeId);
+	
 	if ( $parentId != null )
 	{ // magento category id given: use as parent
 		$category->getParentCategory()->setId($parentId);
