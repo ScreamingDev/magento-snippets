@@ -268,3 +268,44 @@ Make sure the block that you’re working is of the type catalog/navigation. If 
 	<?php endif; ?>
 </div>
 ```
+
+### Import category
+
+```php
+<?php
+
+	/* @var $category Mage_Catalog_Model_Category */
+        $category = Mage::getModel('catalog/category');
+
+	$parentId = null;	// possible parent
+	
+	$mapping = array(
+	        'name'             => '',
+	        //'path' => '',
+	        'description'      => '',
+	        'meta_title'       => '',
+	        'meta_keywords'    => '',
+	        'meta_description' => '',
+	        'landing_page'     => '',
+	        'display_mode'     => 'PRODUCTS_AND_PAGE',
+	        'is_active'        => 1,
+	        'is_anchor'        => 0,
+	        'url_key'          => '',
+	        'image'            => '',
+	);
+
+	$category->addData($mapping);
+	if ( $parentId != null )
+	{ // magento category id given: use as parent
+		$category->getParentCategory()->setId($parentId);
+	}
+	
+	try
+	{
+		$category->save();
+		verbose("Added category {$data->idCategory} as {$category->getId()} ..");
+	} catch ( Exception $e )
+	{
+		echo '!! ERROR: ' . $e->getMessage();
+		exit;
+	}
