@@ -5,6 +5,10 @@ Controller (Front Controller, Request, Response, Varien),
 Helper (Cookie, File, Hint, Http, Js, String, Translate, Url),
 and plenty Model (App, Cache, Calculate, Convert, Date, Locale, Observer, Store, Website etc.).
 
+- [Get the current URL in Magento] (#get-the-current-url-in-magento)
+- [getBaseUrl - Magento URL Path] (#getbaseurl--magento-url-path)
+- [Add JavaScript to page] (#add-javascript-to-page)
+
 ## Get The Current URL In Magento
 
 ```php
