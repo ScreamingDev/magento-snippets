@@ -83,3 +83,18 @@ WHERE
 OR
 `path` = "dev/debug/template_hints_blocks";
 ```
+
+## See what event has been dispatched
+
+If you want to see all events that has been thrown for the site you look at or until the point you are,
+you need to core hack \Mage_Core_Model_App::dispatchEvent and add logging to the very start of the method:
+
+```
+function dispatchEvent($eventName, $args = array())
+{
+    echo $eventName;
+    // ...
+```
+
+Or something like `var_dump` etc. to get all dispatched events.
+Upcoming are not included.
