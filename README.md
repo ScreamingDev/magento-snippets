@@ -15,6 +15,11 @@ Divided by Magento structure:
 * [Directory](Diectory.md)
 * [Other](Other.md)
 
+And even more:
+
+* [Magento files](magento) - XML and other skeleton to work with
+* [Server scripts](server) - Helpful config and shell files for managing magento on the server
+
 ## Contribute
 
 Fork and add your own snippets.
