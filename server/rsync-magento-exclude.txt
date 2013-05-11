@@ -1,0 +1,5 @@
+.svn
+.git
+.git*
+var/
+.cache
