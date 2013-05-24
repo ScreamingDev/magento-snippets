@@ -126,7 +126,7 @@ $cache = Mage::getModel('core/cache');
 ?>
 ```
 
-### CRUD
+#### CRUD
 
 ```php
 <?php
