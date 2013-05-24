@@ -102,3 +102,58 @@ function dispatchEvent($eventName, $args = array())
 
 Or something like `var_dump` etc. to get all dispatched events.
 Upcoming are not included.
+
+
+## Cache
+
+### Using Mage_Core_Model_Cache
+
+Using possible options:
+
+```php
+
+// default options (no need to provide this array, just an example what is possible)
+$options = array(
+    'id_prefix'     => '',    // this_is_unique_42
+    'prefix'        => '',    // some_prefix_
+    'disallow_save' => false, // be volatile instead of persistent
+    // 'request_processors' => ...
+);
+
+$cache = Mage::getModel('core/cache');
+
+### CRUD
+
+```php
+
+
+$cache = Mage::getModel('core/cache');
+$theData = 'foo';
+
+/*
+ * Create / Update
+ */
+$cache->save($theData, 'id_the_data');
+// $cache->save($theData, 'id_the_data', array('some', 'tags'), $lifetime);
+
+/*
+ * Read
+ */
+$tmp = $cache->load('id_the_data');
+
+/*
+ * Delete
+ */
+
+// single
+$cache->remove('id_the_data');
+
+// multiple by tag
+$cache->clean(array('some', 'tags'));
+
+// all
+$cache->clean();
+
+```
+
+More possibilities by using `$cache->getFrontend()` which gives access to Zend_Cache.
