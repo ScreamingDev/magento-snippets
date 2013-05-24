@@ -131,7 +131,12 @@ $cache = Mage::getModel('core/cache');
 ```php
 <?php
 
-$cache = Mage::getModel('core/cache');
+$cacheOptions = array(
+    'id_prefix'     => 'this_is_unique_42',
+);
+
+$cache = Mage::getModel('core/cache', $cacheOptions);
+
 $theData = 'foo';
 
 /*
