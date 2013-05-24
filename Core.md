@@ -111,6 +111,7 @@ Upcoming are not included.
 Using possible options:
 
 ```php
+<?php
 
 // default options (no need to provide this array, just an example what is possible)
 $options = array(
@@ -122,10 +123,13 @@ $options = array(
 
 $cache = Mage::getModel('core/cache');
 
+?>
+```
+
 ### CRUD
 
 ```php
-
+<?php
 
 $cache = Mage::getModel('core/cache');
 $theData = 'foo';
@@ -153,6 +157,8 @@ $cache->clean(array('some', 'tags'));
 
 // all
 $cache->clean();
+
+?>
 
 ```
 
