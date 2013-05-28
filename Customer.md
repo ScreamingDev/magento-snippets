@@ -13,6 +13,19 @@ Things about Account, Address, Attributes, Forms, Groups, Observer, Session and 
     ?>
 ```
 
+## Get current customer
+
+```php
+<?php
+
+    public function getCustomer()
+    {
+        return Mage::getSingleton('customer/session')->getCustomer();
+    }
+
+?>
+```
+
 ## Update all subscribers into a customer group (e.g. 5)
 
 ```sql
