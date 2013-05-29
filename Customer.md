@@ -2,8 +2,12 @@
 
 Things about Account, Address, Attributes, Forms, Groups, Observer, Session and Widgets especially for customer.
 
+## Session
 
-## Check if customer is logged in
+Information about the current customer or visitor of this page.
+
+
+### Check if customer is logged in
 
 ```php
     <?php
@@ -13,7 +17,7 @@ Things about Account, Address, Attributes, Forms, Groups, Observer, Session and 
     ?>
 ```
 
-## Get current customer
+### Get current customer
 
 ```php
 <?php
