@@ -30,6 +30,53 @@ Information about the current customer or visitor of this page.
 ?>
 ```
 
+## Customer
+
+### Get customer by attribute
+
+Sometimes you need to filter your customers by attribute.
+An attribute can be a foreign customer number or other identities.
+Take this method or it's body to search for such customer:
+
+```php
+<?php
+
+    /**
+     * Load customer by attribute
+     *
+     * @see Mage_Catalog_Model_Abstract::loadByAttribute()
+     * 
+     * @param Mage_Eav_Model_Entity_Attribute_Interface|integer|string|array $attribute Attribute to filter
+     * @param null|string|array                                              $value     Value to meet
+     *
+     * @return array
+     */
+    public function loadByAttribute($attribute, $value)
+    {
+        // Get collection and filter by attribute value pair
+        $collection = Mage::getModel('customer/customer')->getCollection()
+            ->addAttributeToFilter($attribute, $value);
+
+        $customerSet = array();
+        foreach ($collection as $customer)
+        {
+            /** @var Mage_Customer_Model_Abstract $customer Customer that fits the pattern. */
+            if (is_object($customer))
+            {
+            	// return $customer; // will instantly get the first found customer
+            
+                // append to array
+                $customerSet[] = $customer;
+            }
+        }
+        
+        return $customerSet;
+    }
+
+```
+
+You received an array with all customer that fit the attribute and value.
+
 ## Update all subscribers into a customer group (e.g. 5)
 
 ```sql
