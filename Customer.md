@@ -32,7 +32,9 @@ Information about the current customer or visitor of this page.
 
 ### Login as customer / user in Magento
 
-```
+If you want to take over the control of an other customer load him and tell the session to login:
+
+```php
 <?php
 
 /** @var $customer Mage_Customer_Model_Customer */
@@ -47,6 +49,9 @@ $session->loginById($customer->getId());
 
 ?>
 ```
+
+Now you are acting as a different customer.
+If needed remember to switch back to your account by doing the same thing again with your mail address.
 
 ## Customer
 
