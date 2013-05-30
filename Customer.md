@@ -30,6 +30,24 @@ Information about the current customer or visitor of this page.
 ?>
 ```
 
+### Login as customer / user in Magento
+
+```
+<?php
+
+/** @var $customer Mage_Customer_Model_Customer */
+$customer = Mage::getModel('customer/customer');
+
+// get the customer (by Mail)
+$customer->loadByEmail('customer@example.org');
+
+/** @var $session Mage_Customer_Model_Session */
+$session = Mage::getModel('customer/session');
+$session->loginById($customer->getId());
+
+?>
+```
+
 ## Customer
 
 ### Get customer by attribute
@@ -89,22 +107,4 @@ WHERE
 	customer_entity.`entity_id` = newsletter_subscriber.`customer_id`
 AND
 	newsletter_subscriber.`subscriber_status` = 1;
-```
-
-## Login as customer / user in Magento
-
-```
-<?php
-
-/** @var $customer Mage_Customer_Model_Customer */
-$customer = Mage::getModel('customer/customer');
-
-// get the customer (by Mail)
-$customer->loadByEmail('customer@example.org');
-
-/** @var $session Mage_Customer_Model_Session */
-$session = Mage::getModel('customer/session');
-$session->loginById($customer->getId());
-
-?>
 ```
