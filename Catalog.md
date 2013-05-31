@@ -312,6 +312,8 @@ Make sure the block that you’re working is of the type catalog/navigation. If 
 		echo '!! ERROR: ' . $e->getMessage();
 		exit;
 	}
+	
+```
 
 ### Delete all categories
 
