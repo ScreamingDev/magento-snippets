@@ -20,7 +20,7 @@ foreach ($session->getQuote()->getAllItems() as $item) {
 ?>
 ```
 
-# Add product (by id)
+## Add product (by id)
 
 ```php
 <?php
@@ -39,4 +39,18 @@ if ( in_array($productId, $cart->getQuoteProductIds()) )
 $cart->addProduct($productId);
 
 ?>
+```
+
+## A Success Message / Error Message / Notice
+
+```php
+<?php
+
+// Mage::getSingleton('checkout/session')->addSuccess("Your cart has been updated successfully!");
+// Mage::getSingleton('checkout/session')->addError("Your cart has been updated successfully!");
+Mage::getSingleton('checkout/session')->addNotice("This is just a FYI message...");
+
+// Make it work
+session_write_close();
+$this->_redirect('checkout/cart'); // <<< your target
 ```
