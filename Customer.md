@@ -30,6 +30,26 @@ Information about the current customer or visitor of this page.
 ?>
 ```
 
+### Get random customer
+
+```php
+<?
+
+/* @var $collection Mage_Customer_Model_Resource_Customer_Collection */
+$collection = Mage::getModel('customer/customer')->getCollection();
+$collection->getSelect()->order('RAND()');
+$collection->load();
+
+foreach ($collection as $customer)
+{
+    /** @var Mage_Customer_Model_Customer $customer */
+
+    ###
+}
+
+?>
+```
+
 ### Login as customer / user in Magento
 
 If you want to take over the control of an other customer load him and tell the session to login:
