@@ -154,6 +154,26 @@ if($_productCollection->count()) {
 ?>
 ```
 
+### Get random product
+
+```
+<?php
+
+    /* @var $collection Mage_Catalog_Model_Resource_Product_Collection */
+    $collection = Mage::getModel('catalog/product')->getCollection();
+    $collection->getSelect()->order('RAND()');
+    $collection->load();
+
+    foreach ($collection as $product)
+    {
+        /** @var Mage_Catalog_Model_Product $product */
+
+        ###
+    }
+
+?>
+```
+
 ### Delete all products
 
 ```sql
