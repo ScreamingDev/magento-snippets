@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Unit-Test in Magento</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Mike Pretzlaw">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+        document.write('<link rel="stylesheet" href="css/print/' + ( window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">');
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+        body {
+            background: #9dc29f;
+            background: -moz-radial-gradient(center, circle cover, #c6f4c9 0%, #9dc29f 100%);
+            background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #C6F4C9), color-stop(100%, #9dc29f));
+            background: -webkit-radial-gradient(center, circle cover, #C6F4C9 0%, #9dc29f 100%);
+            background: -o-radial-gradient(center, circle cover, #C6F4C9 0%, #9dc29f 100%);
+            background: -ms-radial-gradient(center, circle cover, #C6F4C9 0%, #9dc29f 100%);
+            background: radial-gradient(center, circle cover, #C6F4C9 0%, #9dc29f 100%);
+            background-color: #C6F4C9;
+        }
+
+        .reveal p, ul {
+            color: #21282f;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section>
+            <h1>Unit-Test in Magento</h1>
+
+            <strong>Using Acme_UnitTest</strong>
+
+            <p>
+                <small>Created by <a href="http://mike-pretzlaw.de">Mike Pretzlaw</a> /
+                    <a href="http://twitter.com/hakimel">@fxrmp</a></small>
+            </p>
+        </section>
+
+        <section>
+            <h2>What is this?</h2>
+
+            <ul>
+                <li>Introduction to UnitTest</li>
+                <li>Usage of EcomDev_UnitTest for Magento</li>
+                <li>Usage of Acme_UnitTest as a helper</li>
+            </ul>
+
+            <aside class="notes">
+                Acme_UnitTest contains helping classes for easily creating UnitTests in Magento.
+                You'll need Magento itself and EcomDev_UnitTest to use these.
+            </aside>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: false,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            { src: 'lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            } },
+            { src: 'plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            } },
+            { src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            } },
+            { src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            } },
+            { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () {
+                return !!document.body.classList;
+            } },
+            { src: 'plugin/notes/notes.js', async: true, condition: function () {
+                return !!document.body.classList;
+            } }
+            // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+            // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+    });
+
+</script>
+
+</body>
+</html>
