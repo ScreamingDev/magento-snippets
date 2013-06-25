@@ -26,6 +26,29 @@
  * @link       http://github.com/sourcerer-mike/magento-snippets
  * @since      0.1.0
  */
-class Acme_UnitTest_Test_AbstractCase extends EcomDev_PHPUnit_Test_Case {
+abstract class LeMike_Skeleton_Test_AbstractCase extends EcomDev_PHPUnit_Test_Case
+{
+    const FRONTEND_CLASS = '';
 
+
+    public function getFrontend()
+    {
+        $frontend = static::FRONTEND_CLASS;
+
+        return new $frontend;
+    }
+
+    public function testSelf()
+    {
+        $this->assert
+    }
+
+
+    public function testBlackbox()
+    {
+        $class = new ReflectionClass('Some_Class');
+        $protected = $class->getProperty('_someProtected');
+        $protected->setAccessible(true);
+        $this->assertInternalType('string', $protected->getValue(new Some_Class));
+    }
 }
