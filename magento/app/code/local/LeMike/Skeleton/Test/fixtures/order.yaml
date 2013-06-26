@@ -1,0 +1,14 @@
+tables:
+  sales/order:
+    - entity_id: 1
+      state: pending
+      status: pending
+    - entity_id: 2
+      state: processing
+      status: processing
+    - entity_id: 3
+      state: processing
+      status: processing
+    - entity_id: 4
+      state: canceled
+      status: canceled
