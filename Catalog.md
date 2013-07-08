@@ -174,6 +174,39 @@ if($_productCollection->count()) {
 ?>
 ```
 
+### Delete all products programaticaly
+
+Place this somewhere in `shell` Directory for example and set the correct `$storeId` and `$storeCode`:
+
+```PHP
+<?php
+
+require_once 'app/Mage.php';
+
+$storeId = 1;
+$storeCode = "de";
+
+Mage :: app($storeCode)->setCurrentStore( Mage_Core_Model_App :: ADMIN_STORE_ID );
+$products = Mage :: getResourceModel('catalog/product_collection')->setStoreId($storeId)->getAllIds();
+
+if(is_array($products))
+{
+	foreach ($products as $key => $pId)
+	{
+	    try
+	    {
+	        $product = Mage::getModel('catalog/product')->load($pId)->delete();
+	        echo "successfully deleted product with ID: ". $pId ."<br />";
+	    }
+	    catch (Exception $e)
+	    {
+	        echo "Could not delete product with ID: ". $pId ."<br />";
+	    }
+	}
+}
+
+```
+
 ### Delete all products
 
 ```sql
