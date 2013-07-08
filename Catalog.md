@@ -181,7 +181,7 @@ Place this somewhere in `shell` Directory for example and set the correct `$stor
 ```PHP
 <?php
 
-require_once 'app/Mage.php';
+require_once '../app/Mage.php';
 
 $storeId = 1;
 $storeCode = "de";
