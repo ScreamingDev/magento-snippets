@@ -196,11 +196,11 @@ if(is_array($products))
 	    try
 	    {
 	        $product = Mage::getModel('catalog/product')->load($pId)->delete();
-	        echo "successfully deleted product with ID: ". $pId ."<br />";
+	        echo "successfully deleted product with ID: ". $pId ."\n";
 	    }
 	    catch (Exception $e)
 	    {
-	        echo "Could not delete product with ID: ". $pId ."<br />";
+	        echo "Could not delete product with ID: ". $pId ."\n";
 	    }
 	}
 }
