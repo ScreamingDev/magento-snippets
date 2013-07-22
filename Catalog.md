@@ -398,3 +398,34 @@ foreach ($categories as $category_id) {
 }
 
 ```
+
+Alternative:
+
+```
+$idSet = Mage::getModel('catalog/category')->getCollection()->getAllIds();
+
+while ($categoryId = array_shift($idSet))
+{
+
+    try {
+        $category = Mage::getModel("catalog/category")->load($categoryId);
+        if (!$category->hasChildren())
+        {
+            echo "Delete $categoryId ...";
+            $category->delete();
+            echo PHP_EOL;
+        }
+        else
+        {
+            $idSet[] = $categoryId;
+        }
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+
+    echo PHP_EOL;
+
+}
+
+echo PHP_EOL;
+```
