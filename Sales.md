@@ -40,22 +40,24 @@ to replace the "Acme_Foo" with your company and module name:
         </models>
     </global>
     
+Now you need to extend `Mage_Sales_Model_Order` but with a copy
+of the method "sendNewOrderEmail".
+Right before `$mailer->send();` you place your lines to add attachements:
 
-
-class Acme_Foo_Model_Order extends Mage_Sales_Model_Order
-{
-    public function sendNewOrderEmail()
+    class Acme_Foo_Model_Order extends Mage_Sales_Model_Order
     {
-        // copy all of the original contents here !!!
-        
-        // but right before $mailer->send(); at the bottom you add:
-        $mailer->addAttachment($fileContents, $attachementName);
-        
-        // and then the origin continues:
-        $mailer->send();
-        // ... and so on
+        public function sendNewOrderEmail()
+        {
+            // copy all of the original contents here !!!
+            
+            // right before `$mailer->send();` at the bottom you add:
+            $mailer->addAttachment($fileContents, $attachementName);
+            
+            // and then the origin continues:
+            $mailer->send();
+            // ... and so on
+        }
     }
-}
 
 ## Quote
 
